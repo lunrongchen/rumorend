@@ -24,6 +24,19 @@ def GetSingleTweetByUrl(_url):
     result = json.dumps(result)
     return result
 
+def GetUserScoreById(_user):
+	identity_url_pre = "http://api.klout.com/v2/identity.json/twitter?screenName="
+	identity_url_suf = "&key=6ubcypzb7x9ruqgpmc2s8rds"
+	identity_url_request = identity_url_pre + _user + identity_url_suf
+	identity_info_text = requests.get(identity_url_request).text
+	identity_info_json = json.loads(identity_info_text)
+	score_url_pre = "http://api.klout.com/v2/user.json/"
+	score_url_suf = "/score?key=6ubcypzb7x9ruqgpmc2s8rds"
+	score_url_request = score_url_pre + identity_info_json['id'] + score_url_suf
+	score_info_text = requests.get(score_url_request).text
+	score_info_json = json.loads(score_info_text)
+	return score_info_json['score']
+
 # start = time.time()
 # url_test = "https://twitter.com/HillaryClinton/status/799043343275753472"
 # print GetSingleTweetByUrl(url_test)
@@ -43,6 +56,9 @@ def GetListUrlByGoogleKeywordSearch(_key_word):
     # print tweet_data
 
 if __name__ == '__main__':
-    url_test = "https://twitter.com/HillaryClinton/status/796056175179599872"
+    # url_test = "https://twitter.com/HillaryClinton/status/796056175179599872"
     # url_test = "https://twitter.com/HillaryClinton/status/799043343275753472"
-    print GetSingleTweetByUrl(url_test)
+    # print GetSingleTweetByUrl(url_test)
+    GetUserScoreById("HillaryClinton")
+
+
