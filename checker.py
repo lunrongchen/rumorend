@@ -14,10 +14,10 @@ def getSafeScore(_url):
     wot_result_json = getResultByWOT(_url).values()[0]
     total = 0
     n = 0
-    if "0" in wot_result_json and wot_result_json["0"][1] > 10:
+    if "0" in wot_result_json:
         total += wot_result_json["0"][0]
         n += 1
-    if "4" in wot_result_json and wot_result_json["4"][1] > 10:
+    if "4" in wot_result_json:
         total += wot_result_json["4"][0]
         n += 1
     return total / n

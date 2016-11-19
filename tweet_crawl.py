@@ -21,7 +21,7 @@ def GetSingleTweetByUrl(_url):
             result['urls'].append(r.url)
         except:
             pass
-    result = json.dumps(result)
+    # result = json.dumps(result)
     return result
 
 def GetUserScoreById(_user):
