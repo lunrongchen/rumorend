@@ -1,7 +1,7 @@
 import random
 
 from flask import Flask, request, jsonify
-from tweet_crawl import GetSingleTweetByUrl
+from tweet_crawl import GetSingleTweetByUrl, GetUserScoreById
 from checker import getSafeScore
 
 context = ("cert/server.crt", "cert/server.key")
@@ -27,10 +27,13 @@ def rumor_detect():
     url = query["url"]
     tweet_info = GetSingleTweetByUrl(url)
     urls = tweet_info["urls"]
-    scores = [getSafeScore(url) for url in urls if "twitter.com" not in url]
-    if len(scores) == 0:
-        return jsonify(80 + random.randint(5))
-    return jsonify(sum(scores) / len(scores))
+    user_id = tweet_info["user"]
+    url_scores = [getSafeScore(url) for url in urls if "twitter.com" not in url]
+    user_score = GetUserScoreById(user_id)
+    url_score_mean = None
+    if len(url_scores) > 0:
+        url_score_mean = sum(url_scores) / len(url_scores)
+    return jsonify([user_score, url_score_mean])
 
 def main():
     app.run(host="0.0.0.0", port=5000, debug=True, ssl_context=context)
