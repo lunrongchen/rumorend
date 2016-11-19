@@ -33,7 +33,7 @@ def rumor_detect():
     url_score_mean = None
     if len(url_scores) > 0:
         url_score_mean = sum(url_scores) / len(url_scores)
-    return jsonify([user_score, url_score_mean])
+    return jsonify([int(user_score), url_score_mean])
 
 def main():
     app.run(host="0.0.0.0", port=5000, debug=True, ssl_context=context)
