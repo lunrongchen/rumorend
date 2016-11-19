@@ -18,9 +18,10 @@ def getResultByWOT(_url):
                 return None
 
 def getSafeScore(_url):
-    wot_result_json = getResultByWOT(_url).values()[0]
+    wot_result_json = getResultByWOT(_url)
     if wot_result_json is None:
         return None
+    wot_result_json = wot_result_json.values()[0]
     total = 0
     n = 0
     if "0" in wot_result_json:
