@@ -6,11 +6,13 @@ from bs4 import BeautifulSoup
 
 def GetSingleTweetByUrl(_url):
     url = _url[:8] + "mobile." + _url[8:]
+    tweet_user = _url.split('/')[3]
     tweet_html = requests.get(url)
     tweet_data = re.findall('<div class="dir-ltr" dir="ltr">(.*)\n<\/div>', tweet_html.text)
     tweet_url = re.findall('''<a href=['"](.*?)['\"].*?(?:<\/a|\/)>''', tweet_data[0])
     tweet_text = re.sub('''<a href=['"](.*?)['\"].*?(?:<\/a|\/)>''', '', tweet_data[0])
     result = {}
+    result['user'] = tweet_user
     result['text'] = tweet_text
     result['urls'] = []
     for url_it in tweet_url :
