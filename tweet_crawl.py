@@ -9,5 +9,6 @@ def GetSingleTweetByUrl(_url):
 	tweet_data = re.sub('''<a href=['"](.*?)['\"].*?(?:<\/a|\/)>''', '', tweet_data[0])
 	return tweet_data
 
-url_test = "https://twitter.com/HillaryClinton/status/799043343275753472"
-print GetSingleTweetByUrl(url_test)
+if __name__ == '__main__':
+	url_test = "https://twitter.com/HillaryClinton/status/799043343275753472"
+	print GetSingleTweetByUrl(url_test)
