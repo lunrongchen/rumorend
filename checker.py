@@ -20,6 +20,8 @@ def getSafeScore(_url):
     if "4" in wot_result_json:
         total += wot_result_json["4"][0]
         n += 1
+    if n == 0:
+        return None
     return total / n
 
 def main():

@@ -29,6 +29,7 @@ def rumor_detect():
     urls = tweet_info["urls"]
     user_id = tweet_info["user"]
     url_scores = [getSafeScore(url) for url in urls if "twitter.com" not in url]
+    url_scores = [score for score in url_scores if score is not None]
     user_score = GetUserScoreById(user_id)
     url_score_mean = None
     if len(url_scores) > 0:
