@@ -3,15 +3,24 @@ import re
 import requests
 
 def getResultByWOT(_url):
-    url_pre = "http://api.mywot.com/0.4/public_link_json2?hosts="
-    url_suf = "/&callback=process&key=9af2a6793e479dacfbc52e93fffd5ae39c6b2a5f"
-    url_request = url_pre +  _url + url_suf
-    WOT_result_jsonp = requests.get(url_request)
-    WOT_result_json = re.sub(r'([a-zA-Z_0-9\.]*\()|(\);?$)', '', WOT_result_jsonp.text)
-    return json.loads(WOT_result_json)
+    fail_cnt = 0
+    while True:
+        try:
+            url_pre = "http://api.mywot.com/0.4/public_link_json2?hosts="
+            url_suf = "/&callback=process&key=9af2a6793e479dacfbc52e93fffd5ae39c6b2a5f"
+            url_request = url_pre +  _url + url_suf
+            WOT_result_jsonp = requests.get(url_request)
+            WOT_result_json = re.sub(r'([a-zA-Z_0-9\.]*\()|(\);?$)', '', WOT_result_jsonp.text)
+            return json.loads(WOT_result_json)
+        except:
+            fail_cnt += 1
+            if fail_cnt >= 2:
+                return None
 
 def getSafeScore(_url):
     wot_result_json = getResultByWOT(_url).values()[0]
+    if wot_result_json is None:
+        return None
     total = 0
     n = 0
     if "0" in wot_result_json:
