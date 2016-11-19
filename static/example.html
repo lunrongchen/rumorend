@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button#btn-detect").click(function(){
+        var json_query = {"url": $("input#input-url").val()};
+        // console.log(json_query);
+        $.post(
+            "http://localhost:5000/rumor_detect_fake",
+            json_query,
+            function(response_data) {
+                $("#result").text("result: " + response_data)
+            }
+        )
+    });
+});
+</script>
+</head>
+<body>
+
+<input type="text" id="input-url"/>
+<button id="btn-detect"> Detect </button>
+<div id="result"> result </div>
+
+</body>
+</html>
+

@@ -10,13 +10,12 @@ def GetSingleTweetByUrl(_url):
 	tweet_data = re.sub('''<a href=['"](.*?)['\"].*?(?:<\/a|\/)>''', '', tweet_data[0])
 	return tweet_data
 
-start = time.time()
-url_test = "https://twitter.com/HillaryClinton/status/799043343275753472"
-print GetSingleTweetByUrl(url_test)
-end = time.time()
-print "--------------------"
-print end - start
-
+# start = time.time()
+# url_test = "https://twitter.com/HillaryClinton/status/799043343275753472"
+# print GetSingleTweetByUrl(url_test)
+# end = time.time()
+# print "--------------------"
+# print end - start
 
 def GetListUrlByGoogleKeywordSearch(_key_word):
 	url_pre = "https://www.google.com/#safe=inactive&q="
@@ -31,3 +30,7 @@ def GetListUrlByGoogleKeywordSearch(_key_word):
 
 # GetListUrlByGoogleKeywordSearch("trump")
 # <cite class="_Rm">https://www.youtube.com/watch?v=JTPohjxJm1M</cite>
+
+if __name__ == '__main__':
+	url_test = "https://twitter.com/HillaryClinton/status/799043343275753472"
+	print GetSingleTweetByUrl(url_test)
