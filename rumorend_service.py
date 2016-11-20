@@ -13,7 +13,7 @@ def rumor_detect_fake():
     if "url" not in query:
         return jsonify(None)
     result = random.randint(0, 100)
-    return jsonify([result, result])
+    return jsonify(result)
 
 @app.route("/example")
 def example():
@@ -34,7 +34,7 @@ def rumor_detect():
     url_score_mean = None
     if len(url_scores) > 0:
         url_score_mean = sum(url_scores) / len(url_scores)
-    return jsonify([int(user_score), url_score_mean])
+    return jsonify(int((user_score + url_score_mean) / 2))
 
 def main():
     app.run(host="0.0.0.0", port=5000, debug=True, ssl_context=context)
