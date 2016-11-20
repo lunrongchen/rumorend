@@ -34,6 +34,8 @@ def rumor_detect():
     url_score_mean = None
     if len(url_scores) > 0:
         url_score_mean = sum(url_scores) / len(url_scores)
+    if url_score_mean is None:
+        return jsonify(int(user_score))
     return jsonify(int((user_score + url_score_mean) / 2))
 
 def main():
