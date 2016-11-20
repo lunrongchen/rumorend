@@ -29,7 +29,7 @@ def GetSingleTweetByUrl(_url):
 
 def GetUserScoreById(_user):
     identity_url_pre = "http://api.klout.com/v2/identity.json/twitter?screenName="
-    identity_url_suf = "&key=6ubcypzb7x9ruqgpmc2s8rds"
+    identity_url_suf = "&key=judkzmdxkjmy3dvngcx9ateq"
     identity_url_request = identity_url_pre + _user + identity_url_suf
     identity_info_text = requests.get(identity_url_request).text
     sleep(0.2)
