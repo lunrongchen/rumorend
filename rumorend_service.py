@@ -13,7 +13,7 @@ def rumor_detect_fake():
     if "url" not in query:
         return jsonify(None)
     result = random.randint(0, 100)
-    return jsonify(result)
+    return jsonify([result, result])
 
 @app.route("/example")
 def example():
