@@ -13,7 +13,6 @@ def getResultByWOT(_url):
             url_request = url_pre +  _url + url_suf[randint(0,1)]
             WOT_result_jsonp = requests.get(url_request)
             WOT_result_json = re.sub(r'([a-zA-Z_0-9\.]*\()|(\);?$)', '', WOT_result_jsonp.text)
-            # print WOT_result_json
             return json.loads(WOT_result_json)
         except:
             fail_cnt += 1
@@ -38,8 +37,9 @@ def getSafeScore(_url):
         return None
     return total / n
 
+
 def main():
-    print getSafeScore("www.example.com")
+    print getResultByWOT("www.example.com")
     print getSafeScore("www.google.com")
     print getSafeScore("www.baidu.com")
 
